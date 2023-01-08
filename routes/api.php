@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\PostController;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +21,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admins'], function () {
+    Route::post('/post', [PostController::class, 'store']);
+});
+
 Route::get('/test', function () {
     return response([
         'message' => 'Blog Api',
     ]);
 });
+
+Route::post('/login', [AdminController::class, 'login']);

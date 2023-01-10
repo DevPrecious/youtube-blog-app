@@ -21,6 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/posts', [PostController::class, 'index']);
+
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:admins'], function () {
     Route::post('/post', [PostController::class, 'store']);
 });

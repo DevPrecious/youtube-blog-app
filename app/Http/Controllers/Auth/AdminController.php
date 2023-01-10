@@ -22,6 +22,7 @@ class AdminController extends Controller
             ], 400);
         }
 
+        
         $token = $admin->createToken('adminLogin')->plainTextToken;
 
         return response([
